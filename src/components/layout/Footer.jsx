@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-copyright">
-          <span>© {new Date().getFullYear()} LUXELAN.</span>
+          <span>© 2026 LUXELAN.</span>
           <span>CRAFTED WITH INTENTION.</span>
         </div>
 
