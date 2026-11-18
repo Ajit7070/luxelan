@@ -61,7 +61,7 @@
 }
 
 .contact-intro-content {
-  padding: 65px 0 45px;
+  padding: 45px 0 45px;
 }
 
 .contact-section-label {
@@ -166,8 +166,6 @@
 .contact-form-wrap {
   width: 100%;
   padding: 45px 42px;
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-form-heading {

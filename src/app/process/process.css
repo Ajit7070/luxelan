@@ -166,7 +166,7 @@
   grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
   align-items: center;
   min-height: 650px;
-  margin-bottom: 95px;
+
   scroll-margin-top: 100px;
 }
 
@@ -821,5 +821,973 @@
   .process-stage.reverse .process-stage-image,
   .process-stage.reverse .process-stage-content {
     transform: none;
+  }
+}
+
+/* =========================================
+   TOP PROCESS BANNER
+========================================= */
+
+.process-banner {
+  position: relative;
+  width: 100%;
+  height: min(690px, 75vh);
+  min-height: 520px;
+  overflow: hidden;
+  background: #15110e;
+}
+
+.process-banner-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  opacity: 0.75;
+}
+
+.process-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(8, 8, 8, 0.86) 0%,
+      rgba(8, 8, 8, 0.58) 45%,
+      rgba(8, 8, 8, 0.12) 100%
+    ),
+    linear-gradient(0deg, rgba(8, 8, 8, 0.5), transparent 45%);
+}
+
+.process-banner-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.process-banner-content .process-eyebrow {
+  color: var(--lux-light-gold, #fbd1a6);
+}
+
+.process-banner-content h1 {
+  margin: 25px 0;
+  color: #fff8f0;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(65px, 8vw, 112px);
+  font-weight: 400;
+  line-height: 1.02;
+  width: 80%;
+}
+
+.process-banner-content h1 em {
+  color: var(--lux-gold, #d1864c);
+  font-style: normal;
+}
+
+.process-banner-content p {
+  max-width: 420px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.process-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 35px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--lux-gold, #d1864c);
+  color: var(--lux-light-gold, #fbd1a6);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: gap 0.3s ease;
+}
+
+.process-banner-link:hover {
+  gap: 42px;
+  color: #fff;
+}
+
+.process-banner-link span {
+  font-size: 18px;
+}
+
+.process-banner-index {
+  position: absolute;
+  right: 7%;
+  bottom: 45px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.process-banner-index-line {
+  width: 55px;
+  height: 1px;
+  background: var(--lux-gold, #d1864c);
+}
+
+/* =========================================
+   PROCESS INTRO AFTER BANNER
+========================================= */
+
+.process-heading {
+  margin: 50px auto 50px;
+}
+
+.process-heading h2 {
+  margin: 25px 0;
+  color: #f5f0eb;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(60px, 7vw, 94px);
+  font-weight: 400;
+  line-height: 1.03;
+}
+
+.process-heading h2 em {
+  color: var(--lux-gold, #d1864c);
+  font-style: normal;
+}
+
+/* =========================================
+   REVERSIBLE SCROLL REVEAL
+========================================= */
+
+/* Image on the left: reveal from center to left */
+
+.process-stage:not(.reverse) .process-stage-image {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Content on the right: reveal from center to right */
+
+.process-stage:not(.reverse) .process-stage-content {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Content on the left: reveal from center to left */
+
+.process-stage.reverse .process-stage-content {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Image on the right: reveal from center to right */
+
+.process-stage.reverse .process-stage-image {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Open when the stage enters the viewport */
+
+.process-stage.is-visible .process-stage-image,
+.process-stage.is-visible .process-stage-content {
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* When is-visible is removed, the original hidden
+   styles above animate the elements back to center. */
+
+/* =========================================
+   NEW FINAL CTA SECTION
+========================================= */
+
+.process-final {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 7% 45px;
+  background: #e9ddce;
+  color: #29221c;
+}
+
+.process-final-inner {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+.process-final-kicker,
+.process-final-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #78695c;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.process-final-kicker {
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(41, 34, 28, 0.2);
+}
+
+.process-final-main {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 8%;
+  padding: 90px 0 100px;
+}
+
+.process-final-copy {
+  max-width: 620px;
+}
+
+.process-final-eyebrow {
+  color: #a5683e;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+
+.process-final-copy h2 {
+  margin: 25px 0;
+  color: #28211c;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(55px, 6.5vw, 90px);
+  font-weight: 400;
+  line-height: 1.03;
+}
+
+.process-final-copy h2 em {
+  color: #b97849;
+  font-style: normal;
+}
+
+.process-final-copy > p {
+  max-width: 450px;
+  color: #74675d;
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.process-final-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  min-width: 265px;
+  margin-top: 30px;
+  padding: 17px 20px;
+  border: 1px solid #a5683e;
+  color: #493325;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.process-final-link:hover {
+  background: #a5683e;
+  color: #fff;
+}
+
+.process-final-arrow {
+  font-size: 18px;
+}
+
+.process-final-visual {
+  position: relative;
+  height: 490px;
+  overflow: hidden;
+}
+
+.process-final-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.process-final-visual > span {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 12px 15px;
+  background: rgba(8, 8, 8, 0.72);
+  color: #fbd1a6;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.process-final-bottom {
+  padding-top: 22px;
+  border-top: 1px solid rgba(41, 34, 28, 0.2);
+}
+
+/* =========================================
+   RESPONSIVE BANNER AND FINAL CTA
+========================================= */
+
+@media (max-width: 991px) {
+  .process-banner {
+    height: 600px;
+  }
+
+  .process-banner-content {
+    left: 7%;
+  }
+
+  .process-final {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .process-final-main {
+    gap: 5%;
+  }
+
+  .process-final-visual {
+    height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .process-banner {
+    height: 620px;
+    min-height: 0;
+  }
+
+  .process-banner-image {
+    object-position: 60% center;
+  }
+
+  .process-banner-overlay {
+    background: linear-gradient(90deg, rgba(8, 8, 8, 0.75), rgba(8, 8, 8, 0.25)),
+      linear-gradient(0deg, rgba(8, 8, 8, 0.65), transparent 80%);
+  }
+
+  .process-banner-content {
+    left: 25px;
+    width: calc(100% - 50px);
+  }
+
+  .process-banner-content h1 {
+    font-size: clamp(55px, 12vw, 76px);
+  }
+
+  .process-banner-content p {
+    max-width: 330px;
+    font-size: 12px;
+  }
+
+  .process-banner-index {
+    right: 25px;
+    bottom: 25px;
+  }
+
+  .process-heading {
+    margin: 85px auto 90px;
+  }
+
+  .process-heading h2 {
+    font-size: clamp(48px, 11vw, 68px);
+  }
+
+  .process-final {
+    padding: 65px 22px 30px;
+  }
+
+  .process-final-kicker,
+  .process-final-bottom {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .process-final-main {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 65px 0;
+  }
+
+  .process-final-copy h2 {
+    font-size: clamp(48px, 11vw, 66px);
+  }
+
+  .process-final-copy > p {
+    font-size: 12px;
+  }
+
+  .process-final-visual {
+    height: 340px;
+  }
+}
+
+@media (max-width: 380px) {
+  .process-banner {
+    height: 550px;
+  }
+
+  .process-banner-content h1 {
+    font-size: 49px;
+  }
+
+  .process-final-visual {
+    height: 280px;
+  }
+
+  .process-final-link {
+    min-width: 100%;
+  }
+}
+
+/* =========================================
+   TOP PROCESS BANNER
+========================================= */
+
+.process-banner {
+  position: relative;
+  width: 100%;
+  height: min(690px, 75vh);
+  min-height: 520px;
+  overflow: hidden;
+  background: #15110e;
+}
+
+.process-banner-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  opacity: 0.75;
+}
+
+.process-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(8, 8, 8, 0.86) 0%,
+      rgba(8, 8, 8, 0.58) 45%,
+      rgba(8, 8, 8, 0.12) 100%
+    ),
+    linear-gradient(0deg, rgba(8, 8, 8, 0.5), transparent 45%);
+}
+
+.process-banner-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  z-index: 2;
+
+  transform: translateY(-50%);
+}
+
+.process-banner-content .process-eyebrow {
+  color: var(--lux-light-gold, #fbd1a6);
+}
+
+.process-banner-content h1 {
+  margin: 25px 0;
+  color: #fff8f0;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(65px, 8vw, 112px);
+  font-weight: 400;
+  line-height: 1.02;
+}
+
+.process-banner-content h1 em {
+  color: var(--lux-gold, #d1864c);
+  font-style: normal;
+}
+
+.process-banner-content p {
+  max-width: 420px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.process-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 35px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--lux-gold, #d1864c);
+  color: var(--lux-light-gold, #fbd1a6);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: gap 0.3s ease;
+}
+
+.process-banner-link:hover {
+  gap: 42px;
+  color: #fff;
+}
+
+.process-banner-link span {
+  font-size: 18px;
+}
+
+.process-banner-index {
+  position: absolute;
+  right: 7%;
+  bottom: 45px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.process-banner-index-line {
+  width: 55px;
+  height: 1px;
+  background: var(--lux-gold, #d1864c);
+}
+
+/* =========================================
+   PROCESS INTRO AFTER BANNER
+========================================= */
+
+.process-heading {
+  margin: 55px auto 55px;
+}
+
+.process-heading h2 {
+  margin: 25px 0;
+  color: #f5f0eb;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(60px, 7vw, 94px);
+  font-weight: 400;
+  line-height: 1.03;
+}
+
+.process-heading h2 em {
+  color: var(--lux-gold, #d1864c);
+  font-style: normal;
+}
+
+/* =========================================
+   REVERSIBLE SCROLL REVEAL
+========================================= */
+
+/* Image on the left: reveal from center to left */
+
+.process-stage:not(.reverse) .process-stage-image {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Content on the right: reveal from center to right */
+
+.process-stage:not(.reverse) .process-stage-content {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Content on the left: reveal from center to left */
+
+.process-stage.reverse .process-stage-content {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Image on the right: reveal from center to right */
+
+.process-stage.reverse .process-stage-image {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+  transition: clip-path 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+
+/* Open when the stage enters the viewport */
+
+.process-stage.is-visible .process-stage-image,
+.process-stage.is-visible .process-stage-content {
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* When is-visible is removed, the original hidden
+   styles above animate the elements back to center. */
+
+/* =========================================
+   NEW FINAL CTA SECTION
+========================================= */
+
+.process-final {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 7% 45px;
+  background: #e9ddce;
+  color: #29221c;
+}
+
+.process-final-inner {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+.process-final-kicker,
+.process-final-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #78695c;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.process-final-kicker {
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(41, 34, 28, 0.2);
+}
+
+.process-final-main {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 8%;
+  padding: 90px 0 100px;
+}
+
+.process-final-copy {
+  max-width: 620px;
+}
+
+.process-final-eyebrow {
+  color: #a5683e;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+
+.process-final-copy h2 {
+  margin: 25px 0;
+  color: #28211c;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(55px, 6.5vw, 90px);
+  font-weight: 400;
+  line-height: 1.03;
+}
+
+.process-final-copy h2 em {
+  color: #b97849;
+  font-style: normal;
+}
+
+.process-final-copy > p {
+  max-width: 450px;
+  color: #74675d;
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 13px;
+  line-height: 2;
+}
+
+.process-final-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  min-width: 265px;
+  margin-top: 30px;
+  padding: 17px 20px;
+  border: 1px solid #a5683e;
+  color: #493325;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.process-final-link:hover {
+  background: #a5683e;
+  color: #fff;
+}
+
+.process-final-arrow {
+  font-size: 18px;
+}
+
+.process-final-visual {
+  position: relative;
+  height: 490px;
+  overflow: hidden;
+}
+
+.process-final-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.process-final-visual > span {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 12px 15px;
+  background: rgba(8, 8, 8, 0.72);
+  color: #fbd1a6;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.process-final-bottom {
+  padding-top: 22px;
+  border-top: 1px solid rgba(41, 34, 28, 0.2);
+}
+
+/* =========================================
+   RESPONSIVE BANNER AND FINAL CTA
+========================================= */
+
+@media (max-width: 991px) {
+  .process-banner {
+    height: 600px;
+  }
+
+  .process-banner-content {
+    left: 7%;
+  }
+
+  .process-final {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .process-final-main {
+    gap: 5%;
+  }
+
+  .process-final-visual {
+    height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .process-banner {
+    height: 620px;
+    min-height: 0;
+  }
+
+  .process-banner-image {
+    object-position: 60% center;
+  }
+
+  .process-banner-overlay {
+    background: linear-gradient(90deg, rgba(8, 8, 8, 0.75), rgba(8, 8, 8, 0.25)),
+      linear-gradient(0deg, rgba(8, 8, 8, 0.65), transparent 80%);
+  }
+
+  .process-banner-content {
+    left: 25px;
+    width: calc(100% - 50px);
+  }
+
+  .process-banner-content h1 {
+    font-size: clamp(55px, 12vw, 76px);
+  }
+
+  .process-banner-content p {
+    max-width: 330px;
+    font-size: 12px;
+  }
+
+  .process-banner-index {
+    right: 25px;
+    bottom: 25px;
+  }
+
+  .process-heading {
+    margin: 85px auto 90px;
+  }
+
+  .process-heading h2 {
+    font-size: clamp(48px, 11vw, 68px);
+  }
+
+  .process-final {
+    padding: 65px 22px 30px;
+  }
+
+  .process-final-kicker,
+  .process-final-bottom {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .process-final-main {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 65px 0;
+  }
+
+  .process-final-copy h2 {
+    font-size: clamp(48px, 11vw, 66px);
+  }
+
+  .process-final-copy > p {
+    font-size: 12px;
+  }
+
+  .process-final-visual {
+    height: 340px;
+  }
+}
+
+@media (max-width: 380px) {
+  .process-banner {
+    height: 550px;
+  }
+
+  .process-banner-content h1 {
+    font-size: 49px;
+  }
+
+  .process-final-visual {
+    height: 280px;
+  }
+
+  .process-final-link {
+    min-width: 100%;
+  }
+}
+
+/* =========================================
+   PROCESS VIDEO BANNER - BLACK OVERLAY
+========================================= */
+
+.process-banner-video {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: min(720px, 82vh);
+  min-height: 560px;
+  overflow: hidden;
+  background: #080808;
+}
+
+.process-banner-video-element {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.process-banner-white-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.48);
+  pointer-events: none;
+}
+
+.process-banner-video .process-banner-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  z-index: 2;
+  width: min(850px, 82%);
+  transform: translateY(-50%);
+}
+
+.process-banner-video .process-eyebrow {
+  color: #fbd1a6;
+}
+
+.process-banner-video .process-banner-content h1 {
+  margin: 25px 0;
+  color: #fff;
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(65px, 8vw, 112px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.process-banner-video .process-banner-content h1 em {
+  color: #d1864c;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.process-banner-video .process-banner-content p {
+  max-width: 460px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.process-banner-video .process-banner-link {
+  color: #fbd1a6;
+  border-color: #d1864c;
+}
+
+.process-banner-video .process-banner-index {
+  z-index: 2;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .process-banner-video {
+    height: 620px;
+    min-height: 0;
+  }
+
+  .process-banner-white-overlay {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .process-banner-video .process-banner-content {
+    left: 25px;
+    width: calc(100% - 50px);
+  }
+
+  .process-banner-video .process-banner-content h1 {
+    font-size: clamp(50px, 11vw, 72px);
+  }
+
+  .process-banner-video .process-banner-content h1 em {
+    white-space: normal;
   }
 }

@@ -40,7 +40,7 @@ const processStages = [
     subtitle: "Turning ideas into a design proposal.",
     description:
       "Once we understand your requirements, our team presents a design proposal along with the project cost. Review the proposed design, discuss your preferences and take the next step.",
-    image: "https://www.luxelan.in/img/how_it_w002.jpg",
+    image: "https://www.luxelan.in/img/how_it_w02.jpg",
     imageAlt: "Interior design proposal presentation",
     steps: [
       {
@@ -106,15 +106,6 @@ const processStages = [
         title: "Onsite final measurement for fixed furniture.",
         description: "Final measurements are taken for fixed furniture.",
       },
-      {
-        title: "Site prepared for delivery.",
-        description:
-          "The site is prepared for the delivery and installation process.",
-      },
-      {
-        title: "Furniture and fittings installation.",
-        description: "Furniture and fittings are installed in your home.",
-      },
     ],
   },
   {
@@ -143,27 +134,15 @@ export default function ProcessPage() {
   const fillRef = useRef(null);
 
   const [activeStage, setActiveStage] = useState(0);
-  const [visibleStages, setVisibleStages] = useState([0]);
-
-  // -------------------------------------
-  // SCROLL TO STAGE
-  // -------------------------------------
 
   const goToStage = (index) => {
-    const target = stageRefs.current[index];
-
-    if (!target) return;
-
-    target.scrollIntoView({
+    stageRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
       block: "center",
     });
   };
 
-  // -------------------------------------
-  // RESET PAGE TO STAGE 01
-  // -------------------------------------
-
+  // Always start at the top of the page.
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -174,37 +153,27 @@ export default function ProcessPage() {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-
-    setActiveStage(0);
-    setVisibleStages([0]);
   }, []);
 
-  // -------------------------------------
-  // OBSERVE STAGES AND REVEAL CONTENT
-  // -------------------------------------
-
+  // Reversible stage reveal:
+  // add is-visible on entry, remove it on exit.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
           const index = Number(entry.target.dataset.stage);
 
-          if (Number.isNaN(index)) return;
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
 
-          setVisibleStages((previous) => {
-            if (previous.includes(index)) return previous;
-            return [...previous, index];
-          });
-
-          setActiveStage(index);
+          if (entry.isIntersecting) {
+            setActiveStage(index);
+          }
         });
       },
       {
         root: null,
-        rootMargin: "-18% 0px -25% 0px",
-        threshold: 0.05,
+        rootMargin: "-15% 0px -20% 0px",
+        threshold: 0,
       }
     );
 
@@ -215,10 +184,7 @@ export default function ProcessPage() {
     return () => observer.disconnect();
   }, []);
 
-  // -------------------------------------
-  // CENTRAL LINE POSITION AND SCROLL FILL
-  // -------------------------------------
-
+  // Central line and marker visibility follow scroll in both directions.
   useEffect(() => {
     const timeline = timelineRef.current;
     const track = trackRef.current;
@@ -226,7 +192,7 @@ export default function ProcessPage() {
 
     if (!timeline || !track || !fill) return;
 
-    let animationFrame = null;
+    let frame = null;
 
     const updateTimeline = () => {
       const firstMarker = markerRefs.current[0];
@@ -248,37 +214,39 @@ export default function ProcessPage() {
       track.style.top = `${firstCenter}px`;
       track.style.height = `${lineHeight}px`;
 
-      const viewportProgress =
-        (window.innerHeight * 0.52 - firstRect.top) /
-        Math.max(1, lastRect.top - firstRect.top);
+      const firstViewportCenter = firstRect.top + firstRect.height / 2;
 
-      const progress = Math.max(0, Math.min(1, viewportProgress));
+      const lastViewportCenter = lastRect.top + lastRect.height / 2;
 
-      fill.style.height = `${progress * 100}%`;
+      const progress =
+        (window.innerHeight * 0.52 - firstViewportCenter) /
+        Math.max(1, lastViewportCenter - firstViewportCenter);
 
-      // Reveal a number only when the scrolling line reaches it.
+      fill.style.height = `${Math.max(0, Math.min(1, progress)) * 100}%`;
+
+      // Markers appear as the line reaches them and disappear
+      // again when the user scrolls back above them.
       markerRefs.current.forEach((marker, index) => {
         if (!marker) return;
 
-        const markerRect = marker.getBoundingClientRect();
-        const markerPosition = markerRect.top + markerRect.height / 2;
+        if (index === 0) {
+          marker.classList.add("is-reached");
+          return;
+        }
 
-        const reached =
-          index === 0 || markerPosition <= window.innerHeight * 0.65;
+        const rect = marker.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
 
         marker.classList.toggle(
           "is-reached",
-          reached || visibleStages.includes(index)
+          center <= window.innerHeight * 0.65
         );
       });
     };
 
     const requestUpdate = () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
-
-      animationFrame = requestAnimationFrame(updateTimeline);
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateTimeline);
     };
 
     updateTimeline();
@@ -286,7 +254,6 @@ export default function ProcessPage() {
     window.addEventListener("scroll", requestUpdate, {
       passive: true,
     });
-
     window.addEventListener("resize", requestUpdate);
 
     const resizeObserver = new ResizeObserver(requestUpdate);
@@ -296,64 +263,72 @@ export default function ProcessPage() {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       resizeObserver.disconnect();
-
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
+      if (frame) cancelAnimationFrame(frame);
     };
-  }, [visibleStages]);
-
-  // -------------------------------------
-  // RENDER
-  // -------------------------------------
+  }, []);
 
   return (
     <main className="lux-process">
-      {/* TOP INFORMATION */}
-      <div className="process-topline">
-        <span>01 — 05</span>
+      {/* TOP LINE */}
 
-        <span className="process-topline-center">THE JOURNEY OF DESIGN</span>
+      {/* TOP BANNER */}
 
-        <span className="process-topline-right">LUXÉLAN</span>
-      </div>
+      {/* TOP VIDEO BANNER */}
+      <section className="process-banner process-banner-video">
+        <video
+          className="process-banner-video-element"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/assets/videos/luxelan-video.mp4" type="video/mp4" />
+        </video>
 
-      {/* HERO */}
-      <section className="process-heading">
+        <div className="process-banner-white-overlay" />
+
+        <div className="process-banner-content">
+          <h1>
+            The Art of
+            <br />
+            <em>The Journey.</em>
+          </h1>
+
+          <a href="#process-journey" className="process-banner-link">
+            EXPLORE OUR PROCESS
+            <span>↓</span>
+          </a>
+        </div>
+      </section>
+
+      {/* INTRODUCTION */}
+      <section className="process-heading" id="process-journey">
         <span className="process-eyebrow">FROM VISION TO REALITY</span>
 
-        <h1>
+        <h2>
           A Journey
           <br />
           Designed
           <br />
           <em>Around You.</em>
-        </h1>
+        </h2>
 
         <p>
           Discover how we transform your vision into a thoughtfully designed
           living experience.
         </p>
-
-        <div className="process-heading-bottom">
-          <span>SCROLL TO EXPLORE</span>
-          <span className="process-heading-line" />
-          <span>01 / 05</span>
-        </div>
       </section>
 
       {/* PROCESS TIMELINE */}
       <section className="process-timeline" ref={timelineRef}>
-        {/* CENTRAL LINE */}
         <div className="process-track" ref={trackRef}>
           <div className="process-track-fill" ref={fillRef} />
         </div>
 
-        {/* STAGES */}
         <div className="process-stages">
           {processStages.map((stage, index) => {
             const isReverse = index % 2 === 1;
-            const isVisible = visibleStages.includes(index);
 
             const imageBlock = (
               <div className="process-stage-image" key="image">
@@ -378,7 +353,6 @@ export default function ProcessPage() {
                 </span>
 
                 <h2>{stage.title}</h2>
-
                 <h3>{stage.subtitle}</h3>
 
                 <p className="process-description">{stage.description}</p>
@@ -407,15 +381,13 @@ export default function ProcessPage() {
                 <button
                   type="button"
                   className="process-next"
-                  onClick={() => {
-                    if (index < processStages.length - 1) {
-                      goToStage(index + 1);
-                    } else {
-                      document.querySelector(".process-final")?.scrollIntoView({
-                        behavior: "smooth",
-                      });
-                    }
-                  }}
+                  onClick={() =>
+                    index < processStages.length - 1
+                      ? goToStage(index + 1)
+                      : document
+                          .querySelector(".process-final")
+                          ?.scrollIntoView({ behavior: "smooth" })
+                  }
                 >
                   {index === 4 ? "COMPLETE YOUR JOURNEY" : "NEXT STAGE"}
                   <span>↗</span>
@@ -430,9 +402,7 @@ export default function ProcessPage() {
                   stageRefs.current[index] = element;
                 }}
                 data-stage={index}
-                className={`process-stage ${isReverse ? "reverse" : ""} ${
-                  isVisible ? "is-visible" : ""
-                }`}
+                className={`process-stage ${isReverse ? "reverse" : ""}`}
               >
                 <div className="process-stage-left">
                   {isReverse ? contentBlock : imageBlock}
@@ -448,11 +418,9 @@ export default function ProcessPage() {
                       activeStage === index ? "active" : ""
                     } ${index === 0 ? "is-reached" : ""}`}
                     onClick={() => goToStage(index)}
-                    aria-label={`Go to stage ${stage.number}: ${stage.title}`}
+                    aria-label={`Go to stage ${stage.number}`}
                     aria-current={activeStage === index ? "step" : undefined}
-                    tabIndex={
-                      index === 0 || visibleStages.includes(index) ? 0 : -1
-                    }
+                    tabIndex={index === 0 ? 0 : -1}
                   >
                     {index + 1}
                   </button>
@@ -467,23 +435,7 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="process-final">
-        <span>THE LUXÉLAN EXPERIENCE</span>
-
-        <h2>
-          Your dream home.
-          <br />
-          <em>Our passion.</em>
-        </h2>
-
-        <p>Every detail, thoughtfully designed around you.</p>
-
-        <a href="/contact" className="process-final-link">
-          <span>START YOUR JOURNEY</span>
-          <span>↗</span>
-        </a>
-      </section>
+      {/* NEW CLOSING SECTION */}
     </main>
   );
 }

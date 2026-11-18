@@ -14,11 +14,6 @@ export default function ContactPage() {
         <div className="contact-main-inner">
           {/* LEFT: INTRODUCTION */}
           <div className="contact-intro">
-            <div className="contact-intro-top">
-              <span>LUXELAN — PRIVATE STUDIO</span>
-              <span>PUNE · INDIA</span>
-            </div>
-
             <div className="contact-intro-content">
               <span className="contact-section-label">
                 LET'S CREATE SOMETHING MEANINGFUL
