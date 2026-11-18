@@ -1,0 +1,825 @@
+/* =========================================
+   LUXELAN PROCESS PAGE
+========================================= */
+
+.lux-process {
+  --process-bg: #080808;
+  --process-text: #f5f0eb;
+  --process-muted: #aaa39d;
+  --process-gold: #d1864c;
+  --process-light-gold: #fbd1a6;
+
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  background: var(--process-bg);
+  color: var(--process-text);
+  font-family: var(--font-body, "Lora", serif);
+}
+
+.lux-process * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   TOP INFORMATION LINE
+========================================= */
+
+.process-topline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 87%;
+  margin: 0 auto;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: #c5b8ac;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.process-topline-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.process-topline-right {
+  color: var(--process-gold);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.process-heading {
+  position: relative;
+  z-index: 2;
+  width: min(900px, calc(100% - 40px));
+  margin: 110px auto 125px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.process-eyebrow {
+  display: inline-block;
+  color: var(--process-gold);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.process-heading h1 {
+  margin: 25px 0;
+  color: var(--process-text);
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(65px, 8.5vw, 112px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+}
+
+.process-heading h1 em {
+  color: var(--process-gold);
+  font-style: normal;
+}
+
+.process-heading > p {
+  max-width: 540px;
+  margin: 25px auto 0;
+  color: var(--process-muted);
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.process-heading-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 55px;
+  color: #88817b;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.process-heading-line {
+  width: 45px;
+  height: 1px;
+  background: var(--process-gold);
+}
+
+/* =========================================
+   TIMELINE WRAPPER
+========================================= */
+
+.process-timeline {
+  position: relative;
+  width: 100%;
+  padding-bottom: 110px;
+}
+
+.process-stages {
+  position: relative;
+  width: min(1500px, 92%);
+  margin: 0 auto;
+}
+
+/* =========================================
+   CENTRAL LINE
+   Its position is calculated from the actual
+   first and last number marker positions.
+========================================= */
+
+.process-track {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  width: 1px;
+  height: 0;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+.process-track-fill {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 2px;
+  height: 0;
+  background: var(--process-gold);
+  box-shadow: 0 0 10px rgba(209, 134, 76, 0.25);
+  transition: height 0.12s linear;
+}
+
+/* =========================================
+   STAGE GRID
+========================================= */
+
+.process-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
+  align-items: center;
+  min-height: 650px;
+  margin-bottom: 95px;
+  scroll-margin-top: 100px;
+}
+
+.process-stage:last-child {
+  margin-bottom: 0;
+}
+
+.process-stage-left {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.process-stage-right {
+  grid-column: 3;
+  grid-row: 1;
+  min-width: 0;
+}
+
+/* Reverse stage: text left, image right */
+
+.process-stage.reverse .process-stage-left {
+  grid-column: 1;
+}
+
+.process-stage.reverse .process-stage-right {
+  grid-column: 3;
+}
+
+/* =========================================
+   CENTER NUMBER MARKERS
+========================================= */
+
+.process-stage-marker {
+  position: relative;
+  z-index: 5;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  background: var(--process-bg);
+  color: #bcb4ad;
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.7);
+
+  transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease,
+    background 0.35s ease, color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Stage 1 is visible immediately */
+
+.process-marker.is-reached {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* Active number */
+
+.process-marker.active {
+  width: 58px;
+  height: 58px;
+  border: 2px solid var(--process-light-gold);
+  background: var(--process-gold);
+  color: #080808;
+  box-shadow: 0 0 0 6px rgba(209, 134, 76, 0.09),
+    0 0 20px rgba(209, 134, 76, 0.14);
+}
+
+.process-marker:hover {
+  border-color: var(--process-gold);
+  color: var(--process-light-gold);
+}
+
+.process-marker.active:hover {
+  color: #080808;
+}
+
+.process-marker:focus-visible {
+  outline: 2px solid var(--process-light-gold);
+  outline-offset: 5px;
+}
+
+/* =========================================
+   STAGE IMAGE
+========================================= */
+
+.process-stage-image {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.process-image-frame {
+  position: relative;
+  width: 100%;
+  height: 490px;
+  overflow: hidden;
+  background: #171717;
+}
+
+.process-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: none;
+  transition: none;
+}
+
+/* Image caption */
+
+.process-image-number {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  padding: 10px 14px;
+  background: rgba(8, 8, 8, 0.78);
+  color: var(--process-light-gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   CENTER-OUT REVEAL ANIMATION
+
+   Normal stage:
+   Image left  -> reveals from right to left.
+   Content right -> reveals from left to right.
+
+   Reverse stage:
+   Content left -> reveals from right to left.
+   Image right -> reveals from left to right.
+========================================= */
+
+/* Normal stage: image on left */
+
+.process-stage:not(.reverse) .process-stage-image {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+
+  transition: clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+
+/* Normal stage: content on right */
+
+.process-stage:not(.reverse) .process-stage-content {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+
+  transition: clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+
+/* Reverse stage: content on left */
+
+.process-stage.reverse .process-stage-content {
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(45px);
+  opacity: 0;
+
+  transition: clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+
+/* Reverse stage: image on right */
+
+.process-stage.reverse .process-stage-image {
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-45px);
+  opacity: 0;
+
+  transition: clip-path 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+
+/* Both sides reveal outward from the center */
+
+.process-stage.is-visible .process-stage-image,
+.process-stage.is-visible .process-stage-content {
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* =========================================
+   STAGE CONTENT
+========================================= */
+
+.process-stage-content {
+  width: 100%;
+  padding: 35px 55px;
+}
+
+.process-stage-label {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--process-gold);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+}
+
+.process-stage-content h2 {
+  max-width: 650px;
+  margin: 0;
+  color: var(--process-text);
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(38px, 3.8vw, 60px);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.process-stage-content h3 {
+  margin: 25px 0 18px;
+  color: var(--process-light-gold);
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.process-description {
+  max-width: 570px;
+  margin: 0;
+  color: var(--process-muted);
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* =========================================
+   PROCESS STEPS
+========================================= */
+
+.process-deliverables {
+  margin-top: 35px;
+}
+
+.process-deliverables-label {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--process-gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.process-deliverables-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.process-deliverable {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.deliverable-number {
+  padding-top: 2px;
+  color: var(--process-gold);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.deliverable-content h4 {
+  margin: 0 0 7px;
+  color: #e9e2dc;
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.deliverable-content p {
+  margin: 0;
+  color: #99918a;
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   NEXT STAGE BUTTON
+========================================= */
+
+.process-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 35px;
+  padding: 0 0 10px;
+  border: 0;
+  border-bottom: 1px solid var(--process-gold);
+  background: transparent;
+  color: var(--process-light-gold);
+  font-family: var(--font-body, "Lora", serif);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: gap 0.35s ease;
+}
+
+.process-next:hover {
+  gap: 38px;
+}
+
+.process-next span {
+  font-size: 18px;
+}
+
+/* =========================================
+   FINAL CTA
+========================================= */
+
+.process-final {
+  position: relative;
+  padding: 130px 20px 145px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+}
+
+.process-final > span {
+  color: var(--process-gold);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+
+.process-final h2 {
+  margin: 25px 0;
+  color: var(--process-text);
+  font-family: var(--font-heading, "Quiche Sans", serif);
+  font-size: clamp(48px, 7vw, 90px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.process-final h2 em {
+  color: var(--process-gold);
+  font-style: normal;
+}
+
+.process-final p {
+  color: var(--process-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.process-final-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  min-width: 230px;
+  margin-top: 30px;
+  padding: 17px 20px;
+  border: 1px solid var(--process-gold);
+  color: var(--process-light-gold);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.process-final-link:hover {
+  background: var(--process-gold);
+  color: #080808;
+}
+
+.process-final-link span:last-child {
+  font-size: 18px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+  .process-stages {
+    width: 95%;
+  }
+
+  .process-stage {
+    grid-template-columns: minmax(0, 1fr) 75px minmax(0, 1fr);
+    min-height: 570px;
+    margin-bottom: 80px;
+  }
+
+  .process-stage-content {
+    padding: 30px 25px;
+  }
+
+  .process-image-frame {
+    height: 420px;
+  }
+
+  .process-stage-content h2 {
+    font-size: clamp(34px, 4vw, 45px);
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+  .process-topline {
+    width: 100%;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .process-topline-center {
+    font-size: 7px;
+  }
+
+  .process-heading {
+    width: 100%;
+    margin: 80px auto 85px;
+    padding: 0 5px;
+  }
+
+  .process-heading h1 {
+    font-size: clamp(47px, 11.5vw, 68px);
+    letter-spacing: -0.5px;
+  }
+
+  .process-heading > p {
+    font-size: 12px;
+  }
+
+  .process-heading-bottom {
+    margin-top: 40px;
+    font-size: 8px;
+  }
+
+  .process-timeline {
+    padding-bottom: 70px;
+  }
+
+  .process-stages {
+    width: 100%;
+    padding-left: 34px;
+  }
+
+  /* Move the timeline to the left on mobile */
+
+  .process-track {
+    left: 17px;
+    transform: none;
+  }
+
+  /* Use one image/content column */
+
+  .process-stage,
+  .process-stage.reverse {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 36px;
+    align-items: start;
+    gap: 0;
+    min-height: auto;
+    margin-bottom: 80px;
+  }
+
+  .process-stage-left,
+  .process-stage.reverse .process-stage-left {
+    display: contents;
+  }
+
+  .process-stage-right,
+  .process-stage.reverse .process-stage-right {
+    display: contents;
+  }
+
+  .process-stage-image {
+    grid-column: 1;
+    grid-row: 1;
+    order: 1;
+  }
+
+  .process-stage-content {
+    grid-column: 1;
+    grid-row: 2;
+    order: 2;
+    padding: 32px 8px 0 0;
+  }
+
+  .process-stage-marker {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-items: start;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  .process-marker,
+  .process-marker.active {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .process-image-frame {
+    height: 310px;
+  }
+
+  .process-image-number {
+    right: 12px;
+    bottom: 12px;
+    font-size: 9px;
+  }
+
+  /* Mobile reveal: image first, content second */
+
+  .process-stage:not(.reverse) .process-stage-image,
+  .process-stage.reverse .process-stage-image {
+    clip-path: inset(0 0 0 100%);
+    transform: translateX(25px);
+  }
+
+  .process-stage:not(.reverse) .process-stage-content,
+  .process-stage.reverse .process-stage-content {
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-25px);
+  }
+
+  .process-stage.is-visible .process-stage-image,
+  .process-stage.is-visible .process-stage-content {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .process-stage-content h2 {
+    font-size: clamp(34px, 9vw, 47px);
+  }
+
+  .process-stage-content h3 {
+    margin: 18px 0 15px;
+    font-size: 13px;
+  }
+
+  .process-description {
+    font-size: 12px;
+  }
+
+  .process-deliverables {
+    margin-top: 28px;
+  }
+
+  .process-deliverables-list {
+    gap: 17px;
+  }
+
+  .deliverable-content h4 {
+    font-size: 12px;
+  }
+
+  .deliverable-content p {
+    font-size: 11px;
+  }
+
+  .process-next {
+    margin-top: 28px;
+  }
+
+  .process-final {
+    padding: 90px 12px 100px;
+  }
+
+  .process-final h2 {
+    font-size: clamp(43px, 10vw, 62px);
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .process-heading h1 {
+    font-size: 46px;
+  }
+
+  .process-stages {
+    padding-left: 29px;
+  }
+
+  .process-track {
+    left: 14px;
+  }
+
+  .process-stage,
+  .process-stage.reverse {
+    grid-template-columns: minmax(0, 1fr) 30px;
+  }
+
+  .process-marker,
+  .process-marker.active {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .process-image-frame {
+    height: 255px;
+  }
+
+  .process-stage-content h2 {
+    font-size: 32px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .process-stage-image,
+  .process-stage-content,
+  .process-marker,
+  .process-track-fill {
+    transition-duration: 0.01ms !important;
+  }
+
+  .process-stage:not(.reverse) .process-stage-image,
+  .process-stage:not(.reverse) .process-stage-content,
+  .process-stage.reverse .process-stage-image,
+  .process-stage.reverse .process-stage-content {
+    transform: none;
+  }
+}

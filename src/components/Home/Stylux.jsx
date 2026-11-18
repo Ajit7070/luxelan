@@ -194,7 +194,7 @@ export default function Stylux() {
       <div className="stylux-hand stylux-ai-hand">
         <img
           ref={robotRef}
-          src="/assets/images/stylux/stylux-lg-hand-1.webp"
+          src="/assets/images/stylux/robot_hand2.png"
           alt="Artificial intelligence robotic hand"
         />
       </div>

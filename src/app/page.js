@@ -1,4 +1,5 @@
 import Hero from "@/components/Home/Hero";
+import OurBrands from "@/components/Home/OurBrands";
 import Process from "@/components/Home/Process";
 import Projects from "@/components/Home/Projects";
 import Statement from "@/components/Home/Statement";
@@ -12,6 +13,7 @@ export default function Home() {
       <Statement />
       <Projects />
       <Stylux />
+      <OurBrands />
       <Process />
       <WorkWithUs />
     </main>

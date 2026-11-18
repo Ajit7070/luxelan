@@ -1860,7 +1860,6 @@ p {
   align-items: center;
   gap: 10px;
   padding: 11px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   color: rgba(255, 255, 255, 0.85);
   font-family: var(--font-body);
   font-size: 14px;
@@ -2390,71 +2389,131 @@ p {
 }
 
 /* =========================================
-   LUXELAN - PROCESS SECTION
+ 
+/* =========================================
+   PROCESS - CINEMATIC BACKGROUND
 ========================================= */
 
 .process-section {
+  position: relative;
   width: 100%;
-  min-height: 430px;
-  background-color: var(--lux-skin);
-
+  min-height: 680px;
+  height: 85vh;
+  max-height: 950px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #080808;
+  color: #fff;
+}
 
-  padding: 90px 30px;
+/* BACKGROUND IMAGE */
+
+.process-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
   overflow: hidden;
 }
 
-.process-inner {
+.process-background img {
+  position: absolute;
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
+  height: 115%;
+  top: -7.5%;
+  left: 0;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
 }
 
-.process-heading {
-  font-family: var(--font-heading);
-  font-size: clamp(36px, 4.1vw, 60px);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -1px;
-  color: #111111;
+/* DARK CINEMATIC OVERLAY */
+
+.process-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.48) 48%,
+      rgba(0, 0, 0, 0.18) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent 55%);
+}
+
+/* CONTENT */
+
+.process-inner {
+  position: relative;
+  width: min(100% - 12%, 1320px);
   margin: 0 auto;
+  padding: 80px 0;
+  z-index: 2;
+}
+
+/* EYEBROW */
+
+.process-eyebrow {
+  display: block;
+  margin-bottom: 30px;
+  color: var(--lux-light-gold);
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+/* HEADING */
+
+.process-heading {
+  max-width: 1050px;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 6vw, 82px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
 }
 
 .process-heading span {
+  color: var(--lux-light-gold);
   font-style: italic;
-  color: var(--lux-gold);
 }
+
+/* CTA */
 
 .process-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 35px;
+  margin-top: 45px;
+  padding: 19px 27px;
 
-  margin-top: 35px;
-  padding: 15px 25px;
-
-  border: 1px solid #111;
-  color: #111;
+  border: 1px solid var(--lux-gold);
+  background: var(--lux-gold);
+  color: #17100b;
 
   font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 2.5px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
 
-  transition: all 0.4s ease;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
 }
 
 .process-cta span {
   font-size: 19px;
-  transition: transform 0.4s ease;
+  transition: transform 0.35s ease;
 }
 
 .process-cta:hover {
-  background: #111;
+  background: transparent;
   color: #fff;
+  transform: translateY(-3px);
 }
 
 .process-cta:hover span {
@@ -2462,33 +2521,289 @@ p {
 }
 
 /* TABLET */
+
 @media (max-width: 991px) {
   .process-section {
-    min-height: 380px;
-    padding: 80px 35px;
+    min-height: 600px;
+    height: 75vh;
   }
 
   .process-heading {
-    font-size: clamp(34px, 5vw, 48px);
+    font-size: clamp(42px, 7vw, 65px);
   }
 }
 
 /* MOBILE */
+
 @media (max-width: 767px) {
   .process-section {
-    min-height: 330px;
-    padding: 70px 22px;
+    height: 680px;
+    min-height: 580px;
+    max-height: none;
+  }
+
+  .process-background img {
+    object-position: 60% center;
+  }
+
+  .process-overlay {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.42)),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.45), transparent);
+  }
+
+  .process-inner {
+    width: calc(100% - 42px);
+    padding: 60px 0;
+  }
+
+  .process-eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
   }
 
   .process-heading {
-    font-size: clamp(29px, 7vw, 40px);
-    line-height: 1.25;
+    font-size: clamp(38px, 10vw, 55px);
+    line-height: 1.13;
+    letter-spacing: -0.5px;
+  }
+
+  .process-heading br {
+    display: none;
   }
 
   .process-cta {
-    margin-top: 28px;
-    padding: 13px 20px;
-    gap: 22px;
+    margin-top: 35px;
+    padding: 16px 20px;
+    gap: 25px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   LUXELAN - OUR BRAND PARTNERS
+========================================= */
+
+.brands-section {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+  padding: 85px 0 65px;
+  isolation: isolate;
+  overflow: hidden;
+  background: #050505;
+  color: #fff;
+}
+
+/* BACKGROUND GRID */
+
+.brands-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+
+  background-size: 70px 70px;
+}
+
+/* HEADING */
+
+.brands-heading {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 65px;
+  padding: 0 20px;
+}
+
+.brands-heading > span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--lux-gold);
+  margin-bottom: 18px;
+}
+
+.brands-heading h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 55px);
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+}
+
+.brands-heading h2 em {
+  color: var(--lux-gold);
+  font-style: italic;
+}
+
+/* MARQUEE */
+
+.brands-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+.brands-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: brandsInfiniteScroll 38s linear infinite;
+  will-change: transform;
+}
+
+.brands-marquee:hover .brands-track {
+  animation-play-state: paused;
+}
+
+.brand-item {
+  flex: 0 0 230px;
+  width: 230px;
+  height: 115px;
+  margin: 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-item img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 175px;
+  max-height: 75px;
+  object-fit: contain;
+
+  filter: grayscale(1) brightness(0) invert(1);
+  opacity: 0.75;
+  transition: filter 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.brand-item:hover img {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* INFINITE ANIMATION */
+
+@keyframes brandsInfiniteScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* CAPTION */
+
+.brands-caption {
+  text-align: center;
+  margin: 45px 20px 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* TABLET */
+
+@media (max-width: 991px) {
+  .brands-section {
+    min-height: 390px;
+    padding: 75px 0 55px;
+  }
+
+  .brands-heading {
+    margin-bottom: 45px;
+  }
+
+  .brand-item {
+    flex-basis: 190px;
+    width: 190px;
+    margin: 0 18px;
+  }
+
+  .brand-item img {
+    max-width: 145px;
+    max-height: 65px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+  .brands-section {
+    min-height: 330px;
+    padding: 65px 0 45px;
+  }
+
+  .brands-heading {
+    margin-bottom: 35px;
+  }
+
+  .brands-heading > span {
     font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .brands-heading h2 {
+    font-size: clamp(29px, 7vw, 38px);
+  }
+
+  .brand-item {
+    flex-basis: 150px;
+    width: 150px;
+    height: 90px;
+    margin: 0 12px;
+  }
+
+  .brand-item img {
+    max-width: 115px;
+    max-height: 55px;
+  }
+
+  .brands-track {
+    animation-duration: 30s;
+  }
+
+  .brands-caption {
+    font-size: 10px;
+    margin-top: 30px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .brands-track {
+    animation: none;
   }
 }

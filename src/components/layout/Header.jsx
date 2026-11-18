@@ -21,12 +21,12 @@ export default function Header() {
   const [pageReady, setPageReady] = useState(false);
 
   const menuItems = [
-    "ABOUT",
-    "THE LUXELAN LIFE",
-    "HOW IT WORKS",
-    "CONTENT HUB",
-    "CAREERS",
-    "CONTACT US",
+    { title: "ABOUT", href: "/about" },
+    { title: "THE LUXELAN LIFE", href: "/luxelan-life" },
+    { title: "HOW IT WORKS", href: "/process" },
+    { title: "CONTENT HUB", href: "/content-hub" },
+    { title: "CAREERS", href: "/careers" },
+    { title: "CONTACT US", href: "/contact" },
   ];
 
   // HEADER INTRO ANIMATION
@@ -272,17 +272,14 @@ export default function Header() {
           <nav className="menu-navigation">
             {menuItems.map((item, index) => (
               <a
-                href="#"
+                href={item.href}
                 className="menu-link"
-                key={item}
-                onClick={(event) => {
-                  event.preventDefault();
-                  setMenuOpen(false);
-                }}
+                key={item.title}
+                onClick={() => setMenuOpen(false)}
               >
                 <span className="menu-index">0{index + 1}</span>
 
-                <span className="menu-title">{item}</span>
+                <span className="menu-title">{item.title}</span>
 
                 <span className="menu-arrow">↗</span>
               </a>
