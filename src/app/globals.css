@@ -67,6 +67,13 @@ body {
   background-color: #ffffff;
   overflow-x: hidden;
 }
+html {
+  scroll-behavior: auto !important;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
 
 img,
 video {
