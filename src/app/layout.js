@@ -3,6 +3,7 @@ import "./globals.css";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CustomCursor from "@/components/layout/CustomCursor";
 
 export const metadata = {
   title: "Luxelan | Luxury Interior Design",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <CustomCursor />
         <Header />
 
         {children}

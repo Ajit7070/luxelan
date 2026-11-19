@@ -2807,3 +2807,235 @@ p {
     animation: none;
   }
 }
+
+/* =========================================
+   LET'S TALK SECTION
+========================================= */
+
+.lets-talk-section {
+  position: relative;
+  width: 100%;
+  min-height: 650px;
+  height: 85vh;
+  max-height: 850px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #e9d8c5;
+  color: #25201b;
+  isolation: isolate;
+}
+
+/* Oversized Typography */
+
+.lets-talk-words {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.lets-talk-word {
+  display: block;
+  font-family: "Quiche Sans", sans-serif;
+  font-size: clamp(130px, 24vw, 360px);
+  line-height: 0.85;
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  color: rgba(37, 32, 27, 0.12);
+  will-change: transform;
+}
+
+.lets-talk-left {
+  margin-right: -0.02em;
+}
+
+.lets-talk-right {
+  margin-left: 0.02em;
+}
+
+/* Center Content */
+
+.lets-talk-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 750px;
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+.lets-talk-eyebrow {
+  margin-bottom: 22px;
+  color: #a66a42;
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+}
+
+.lets-talk-content h2 {
+  margin: 0 0 20px;
+  color: #25201b;
+  font-family: "Quiche Sans", sans-serif;
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.lets-talk-content h2 span {
+  color: #a66a42;
+}
+
+.lets-talk-description {
+  margin: 0 0 32px;
+  color: rgba(37, 32, 27, 0.7);
+  font-family: "Lora", serif;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* Button */
+
+.lets-talk-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-width: 190px;
+  padding: 15px 23px;
+  border: 1px solid #a66a42;
+  border-radius: 50px;
+  background: #a66a42;
+  color: #ffffff;
+  font-family: "Lato", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.35s ease;
+}
+
+.lets-talk-button:hover {
+  background: #25201b;
+  border-color: #25201b;
+  color: #ffffff;
+  transform: translateY(-4px);
+}
+
+.lets-talk-arrow {
+  font-size: 19px;
+  line-height: 1;
+  transition: transform 0.35s ease;
+}
+
+.lets-talk-button:hover .lets-talk-arrow {
+  transform: translate(4px, -4px);
+}
+
+/* Tablet */
+
+@media (max-width: 991px) {
+  .lets-talk-section {
+    min-height: 560px;
+    height: 70vh;
+  }
+
+  .lets-talk-word {
+    font-size: 25vw;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+  .lets-talk-section {
+    min-height: 480px;
+    height: 65vh;
+    max-height: 600px;
+  }
+
+  .lets-talk-word {
+    font-size: 25vw;
+    letter-spacing: -0.08em;
+  }
+
+  .lets-talk-content {
+    width: 94%;
+  }
+
+  .lets-talk-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-bottom: 16px;
+  }
+
+  .lets-talk-content h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .lets-talk-description {
+    font-size: 13px;
+    margin-bottom: 25px;
+  }
+
+  .lets-talk-button {
+    padding: 13px 20px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   LUXELAN CUSTOM CURSOR
+========================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .lux-cursor-enabled,
+  .lux-cursor-enabled * {
+    cursor: none !important;
+  }
+
+  .lux-custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background: #d1864c;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+
+  .lux-custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #d1864c;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999998;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    transition: border-color 0.3s ease;
+  }
+}
+
+/* No custom cursor on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .lux-custom-cursor-dot,
+  .lux-custom-cursor-ring {
+    display: none;
+  }
+}

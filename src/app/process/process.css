@@ -57,7 +57,7 @@
 .process-heading {
   position: relative;
   z-index: 2;
-  width: min(900px, calc(100% - 40px));
+  /* width: min(900px, calc(100% - 40px)); */
   margin: 110px auto 125px;
   padding: 0 20px;
   text-align: center;
@@ -882,7 +882,6 @@
 }
 
 .process-banner-content h1 em {
-  color: var(--lux-gold, #d1864c);
   font-style: normal;
 }
 
@@ -1315,7 +1314,6 @@
 }
 
 .process-banner-content h1 em {
-  color: var(--lux-gold, #d1864c);
   font-style: normal;
 }
 
@@ -1713,6 +1711,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  filter: grayscale(1);
 }
 
 .process-banner-white-overlay {
@@ -1746,7 +1745,6 @@
 }
 
 .process-banner-video .process-banner-content h1 em {
-  color: #d1864c;
   font-style: normal;
   white-space: nowrap;
 }

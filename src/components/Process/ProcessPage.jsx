@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import LetsTalk from "@/components/layout/LetsTalk";
 
 const processStages = [
   {
@@ -307,9 +308,7 @@ export default function ProcessPage() {
         <span className="process-eyebrow">FROM VISION TO REALITY</span>
 
         <h2>
-          A Journey
-          <br />
-          Designed
+          A Journey Designed
           <br />
           <em>Around You.</em>
         </h2>
@@ -436,6 +435,7 @@ export default function ProcessPage() {
       </section>
 
       {/* NEW CLOSING SECTION */}
+      <LetsTalk />
     </main>
   );
 }
