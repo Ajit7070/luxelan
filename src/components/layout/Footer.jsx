@@ -1,4 +1,5 @@
 "use client";
+import { FaInstagram, FaPinterestP, FaLinkedinIn } from "react-icons/fa";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -11,93 +12,127 @@ const quickLinks = [
 export default function Footer() {
   return (
     <footer className="lux-footer">
-      <div className="footer-main">
-        {/* ENQUIRY SECTION */}
-        <div className="footer-enquiry">
-          <span className="footer-eyebrow">
-            LET'S CREATE SOMETHING BEAUTIFUL
-          </span>
+      {/* TOP CONTACT STRIP */}
+      <section className="footer-cta-section">
+        <div className="footer-cta-content">
+          <span className="footer-eyebrow">HAVE SOMETHING IN MIND?</span>
 
           <h2>
-            Let's make
+            Let's create something
             <br />
-            something <span>timeless.</span>
+            <em>extraordinary.</em>
           </h2>
+        </div>
 
-          <p>
-            Have a vision for your space?
+        <a href="/contact" className="footer-main-button">
+          <span>START YOUR PROJECT</span>
+          <span className="footer-main-button-arrow">↗</span>
+        </a>
+
+        <div className="footer-cta-decoration">L</div>
+      </section>
+
+      {/* MAIN FOOTER CONTENT */}
+      <div className="footer-main">
+        {/* BRAND */}
+        <div className="footer-brand-section">
+          <a href="/" className="footer-brand-link">
+            <img
+              src="/assets/images/logo/Luxelanfinallogo.png"
+              alt="Luxelan - The Art of Living"
+              className="footer-logo"
+            />
+          </a>
+
+          <p className="footer-brand-description">
+            Creating thoughtfully designed spaces
             <br />
-            Let's bring it to life together.
+            that reflect your lifestyle, personality
+            <br />
+            and aspirations.
           </p>
 
-          <a href="/contact" className="footer-cta">
-            START A CONVERSATION <span>↗</span>
-          </a>
+          <span className="footer-brand-caption">THE ART OF LIVING</span>
         </div>
 
-        {/* CONTACT SECTION */}
-        <div className="footer-contact">
-          <div className="footer-contact-block">
-            <span className="footer-label">GET IN TOUCH</span>
-            <a href="mailto:hello@luxelan.in" className="footer-email">
-              hello@luxelan.in
-            </a>
-            <span className="footer-note">
-              We'd love to hear about your next project.
-            </span>
-          </div>
-
-          <div className="footer-contact-block">
-            <span className="footer-label">FOLLOW OUR JOURNEY</span>
-
-            <div className="footer-socials">
-              <a href="#" target="_blank" rel="noreferrer">
-                Instagram ↗
-              </a>
-              <a href="#" target="_blank" rel="noreferrer">
-                Pinterest ↗
-              </a>
-              <a href="#" target="_blank" rel="noreferrer">
-                LinkedIn ↗
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* QUICK LINKS */}
+        {/* EXPLORE */}
         <div className="footer-navigation">
-          <span className="footer-label">EXPLORE LUXELAN</span>
+          <span className="footer-label">EXPLORE</span>
 
           <nav>
             {quickLinks.map((link, index) => (
               <a href={link.href} key={link.label}>
                 <span className="footer-link-index">0{index + 1}</span>
-                <span>{link.label}</span>
+
+                <span className="footer-link-name">{link.label}</span>
+
                 <span className="footer-link-arrow">↗</span>
               </a>
             ))}
           </nav>
         </div>
+
+        {/* CONTACT */}
+        <div className="footer-contact">
+          <span className="footer-label">GET IN TOUCH</span>
+
+          <p className="footer-contact-heading">
+            We'd love to hear
+            <br />
+            about your next project.
+          </p>
+
+          <a href="mailto:hello@luxelan.in" className="footer-email">
+            hello@luxelan.in
+            <span>↗</span>
+          </a>
+
+          <div className="footer-social-area">
+            <span className="footer-label">FOLLOW OUR JOURNEY</span>
+
+            <div className="footer-socials">
+              <a
+                href="#"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaInstagram />
+              </a>
+
+              <a
+                href="#"
+                aria-label="Pinterest"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaPinterestP />
+              </a>
+
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaLinkedinIn />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* FOOTER BOTTOM */}
+      {/* BOTTOM BAR */}
       <div className="footer-bottom">
-        <div className="footer-brand">
-          <img
-            src="/assets/images/logo/Luxelanfinallogo.png"
-            alt="Luxelan - The Art of Living"
-            className="footer-logo"
-          />
-          <small>THE ART OF LIVING</small>
-        </div>
+        <span className="footer-bottom-copy">
+          © 2026 LUXELAN. ALL RIGHTS RESERVED.
+        </span>
 
-        <div className="footer-copyright">
-          <span>© 2026 LUXELAN.</span>
-          <span>CRAFTED WITH INTENTION.</span>
-        </div>
+        <span className="footer-bottom-credit">CRAFTED WITH INTENTION.</span>
 
         <a href="#" className="footer-back-top">
-          BACK TO TOP <span>↑</span>
+          BACK TO TOP
+          <span>↑</span>
         </a>
       </div>
     </footer>
