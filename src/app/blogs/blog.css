@@ -1,0 +1,543 @@
+/* =========================================================
+   LUXELAN - BLOG / JOURNAL PAGE
+   File: src/app/blog/blog.css
+========================================================= */
+
+/* =========================
+   1. JOURNAL VARIABLES
+========================= */
+
+.lux-journal-page {
+  --journal-bg: #080808;
+  --journal-card-bg: #101010;
+  --journal-white: #ffffff;
+  --journal-text: #e5e0da;
+  --journal-muted: #a49b91;
+  --journal-gold: #d1864c;
+  --journal-light-gold: #fbd1a6;
+  --journal-border: rgba(255, 255, 255, 0.12);
+
+  width: 100%;
+  min-height: 100vh;
+  background: var(--journal-bg);
+  color: var(--journal-white);
+  overflow: hidden;
+}
+
+/* =========================
+   2. MAIN SECTION
+========================= */
+
+.lux-journal-section {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 170px 7% 120px;
+}
+
+/* =========================
+   3. JOURNAL HEADING
+========================= */
+
+.journal-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 75px;
+}
+
+.journal-heading-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.journal-eyebrow {
+  display: inline-block;
+  color: var(--journal-gold);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.journal-heading h1 {
+  margin: 0;
+  color: var(--journal-white);
+  font-family: var(--font-heading);
+  font-size: clamp(55px, 7vw, 105px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+
+.journal-intro {
+  max-width: 390px;
+  margin: 0 0 8px;
+  color: var(--journal-muted);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+/* =========================
+   4. CATEGORY FILTERS
+   Minimal text style
+   No box / no background
+========================= */
+
+.journal-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 35px;
+
+  margin-bottom: 50px;
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid var(--journal-border);
+}
+
+.journal-filters button {
+  position: relative;
+  display: inline-block;
+
+  padding: 0 0 10px;
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+
+  color: var(--journal-muted);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: color 0.35s ease;
+}
+
+/* Gold underline */
+
+.journal-filters button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 0;
+  height: 1px;
+
+  background: var(--journal-gold);
+
+  transition: width 0.4s ease;
+}
+
+/* Hover and active state */
+
+.journal-filters button:hover,
+.journal-filters button.active {
+  color: var(--journal-light-gold);
+}
+
+.journal-filters button:hover::after,
+.journal-filters button.active::after {
+  width: 100%;
+}
+
+/* Remove default browser button styling */
+
+.journal-filters button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.journal-filters button:focus-visible {
+  outline: 1px solid var(--journal-light-gold);
+  outline-offset: 5px;
+}
+
+/* =========================
+   5. BLOG GRID
+========================= */
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: 65px;
+  width: 100%;
+}
+
+/* =========================
+   6. BLOG CARD
+========================= */
+
+.journal-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  opacity: 1;
+}
+
+/* =========================
+   7. BLOG IMAGE
+========================= */
+
+.journal-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+  background: var(--journal-card-bg);
+
+  text-decoration: none;
+}
+
+.journal-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.9s cubic-bezier(0.2, 0.65, 0.3, 1), opacity 0.6s ease;
+}
+
+.journal-image:hover img {
+  transform: scale(1.06);
+  opacity: 0.82;
+}
+
+/* =========================
+   8. IMAGE ARROW
+========================= */
+
+.journal-image-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+
+  color: var(--journal-white);
+  background: rgba(8, 8, 8, 0.35);
+
+  font-size: 18px;
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.journal-image:hover .journal-image-arrow {
+  opacity: 1;
+  transform: translateY(0);
+  background: var(--journal-gold);
+  border-color: var(--journal-gold);
+}
+
+/* =========================
+   9. BLOG META INFORMATION
+========================= */
+
+.journal-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 11px;
+
+  margin-top: 25px;
+
+  color: var(--journal-muted);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.journal-meta span:first-child {
+  color: var(--journal-gold);
+}
+
+.journal-meta-divider {
+  color: var(--journal-gold);
+  font-size: 13px;
+}
+
+/* =========================
+   10. BLOG TITLE
+========================= */
+
+.journal-card h2 {
+  margin: 17px 0 12px;
+
+  color: var(--journal-white);
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 2vw, 30px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+
+  transition: color 0.35s ease;
+}
+
+.journal-card h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+
+.journal-card h2 a:hover {
+  color: var(--journal-light-gold);
+}
+
+/* =========================
+   11. BLOG DESCRIPTION
+========================= */
+
+.journal-description {
+  max-width: 420px;
+  margin: 0;
+
+  color: var(--journal-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+/* =========================
+   12. EMPTY STATE
+========================= */
+
+.journal-empty {
+  padding: 50px 0;
+
+  color: var(--journal-muted);
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =========================================================
+   13. LARGE LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .lux-journal-section {
+    padding: 150px 5% 100px;
+  }
+
+  .journal-grid {
+    column-gap: 24px;
+    row-gap: 55px;
+  }
+
+  .journal-heading {
+    margin-bottom: 60px;
+  }
+
+  .journal-heading h1 {
+    font-size: clamp(55px, 7vw, 85px);
+  }
+
+  .journal-card h2 {
+    font-size: 25px;
+  }
+}
+
+/* =========================================================
+   14. TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+  .lux-journal-section {
+    padding: 140px 5% 90px;
+  }
+
+  .journal-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 55px;
+  }
+
+  .journal-heading h1 {
+    font-size: clamp(55px, 10vw, 85px);
+  }
+
+  .journal-intro {
+    max-width: 520px;
+    margin: 0;
+  }
+
+  .journal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 25px;
+    row-gap: 50px;
+  }
+
+  .journal-card h2 {
+    font-size: 26px;
+  }
+}
+
+/* =========================================================
+   15. MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .lux-journal-section {
+    padding: 120px 6% 75px;
+  }
+
+  .journal-heading {
+    gap: 22px;
+    margin-bottom: 45px;
+  }
+
+  .journal-heading-left {
+    gap: 14px;
+  }
+
+  .journal-eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .journal-heading h1 {
+    font-size: clamp(46px, 13vw, 65px);
+    letter-spacing: -1px;
+  }
+
+  .journal-intro {
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* Horizontal scrolling filters */
+
+  .journal-filters {
+    flex-wrap: nowrap;
+    gap: 25px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .journal-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .journal-filters button {
+    flex-shrink: 0;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  /* Single column blog layout */
+
+  .journal-grid {
+    grid-template-columns: 1fr;
+    row-gap: 45px;
+  }
+
+  .journal-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .journal-image-arrow {
+    width: 36px;
+    height: 36px;
+    right: 15px;
+    bottom: 15px;
+
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .journal-meta {
+    margin-top: 19px;
+    font-size: 8px;
+    gap: 9px;
+  }
+
+  .journal-card h2 {
+    margin-top: 13px;
+    margin-bottom: 9px;
+    font-size: 27px;
+    line-height: 1.25;
+  }
+
+  .journal-description {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+}
+
+/* =========================================================
+   16. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .lux-journal-section {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .journal-heading h1 {
+    font-size: 44px;
+  }
+
+  .journal-filters {
+    gap: 20px;
+  }
+
+  .journal-card h2 {
+    font-size: 24px;
+  }
+}
+
+/* =========================================================
+   17. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .journal-image img,
+  .journal-image-arrow,
+  .journal-card h2 a,
+  .journal-filters button,
+  .journal-filters button::after {
+    transition: none !important;
+  }
+}

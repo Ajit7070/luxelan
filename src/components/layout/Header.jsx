@@ -26,7 +26,7 @@ export default function Header() {
     { title: "OUR PROJECTS", href: "/projects" },
     { title: "THE LUXELAN LIFE", href: "/luxelan-life" },
     { title: "HOW IT WORKS", href: "/process" },
-    { title: "CONTENT HUB", href: "/content-hub" },
+    { title: "CONTENT HUB", href: "/blogs" },
     { title: "CAREERS", href: "/careers" },
     { title: "CONTACT US", href: "/contact" },
   ];
@@ -280,7 +280,7 @@ export default function Header() {
 
           <nav className="menu-navigation">
             {menuItems.map((item, index) => (
-              <a
+              <Link
                 href={item.href}
                 className="menu-link"
                 key={item.title}
@@ -291,7 +291,7 @@ export default function Header() {
                 <span className="menu-title">{item.title}</span>
 
                 <span className="menu-arrow">↗</span>
-              </a>
+              </Link>
             ))}
           </nav>
 
