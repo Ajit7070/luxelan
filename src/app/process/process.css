@@ -416,7 +416,7 @@
   margin: 0;
   color: var(--process-muted);
   font-family: var(--font-body, "Lora", serif);
-  font-size: 13px;
+
   line-height: 2;
 }
 
@@ -469,7 +469,7 @@
   margin: 0;
   color: #99918a;
   font-family: var(--font-body, "Lora", serif);
-  font-size: 11px;
+
   line-height: 1.8;
 }
 
