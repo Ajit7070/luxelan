@@ -28,8 +28,6 @@ export default function Footer() {
           <span>START YOUR PROJECT</span>
           <span className="footer-main-button-arrow">↗</span>
         </a>
-
-        <div className="footer-cta-decoration">L</div>
       </section>
 
       {/* MAIN FOOTER CONTENT */}

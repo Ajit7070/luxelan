@@ -5,6 +5,7 @@ import Projects from "@/components/Home/Projects";
 import Statement from "@/components/Home/Statement";
 import Stylux from "@/components/Home/Stylux";
 import WorkWithUs from "@/components/Home/WorkWithUs";
+import BlogSection from "@/components/layout/BlogSection";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Stylux />
       <OurBrands />
       <Process />
+      <BlogSection />
       <WorkWithUs />
     </main>
   );
