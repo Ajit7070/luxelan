@@ -2998,7 +2998,7 @@ p {
 .lets-talk-word {
   display: block;
   font-family: "Quiche Sans", sans-serif;
-  font-size: clamp(130px, 24vw, 360px);
+  font-size: clamp(130px, 20vw, 360px);
   line-height: 0.85;
   font-weight: 400;
   letter-spacing: -0.075em;
