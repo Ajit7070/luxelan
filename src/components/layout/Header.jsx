@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useGSAP, gsap } from "@/hooks/useGsap";
+import Link from "next/link";
 
 export default function Header() {
   const headerRef = useRef(null);
@@ -263,11 +264,18 @@ export default function Header() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="menu-top">
-            <img
-              src="/assets/images/logo/Luxelanfinallogo.png"
-              alt="Luxelan - The Art of Living"
-              className="menu-logo"
-            />
+            <Link
+              href="/"
+              className="menu-logo-link"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Luxelan Home"
+            >
+              <img
+                src="/assets/images/logo/Luxelanfinallogo.png"
+                alt="Luxelan - The Art of Living"
+                className="menu-logo"
+              />
+            </Link>
           </div>
 
           <nav className="menu-navigation">
