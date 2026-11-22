@@ -13,22 +13,6 @@ export default function Footer() {
   return (
     <footer className="lux-footer">
       {/* TOP CONTACT STRIP */}
-      <section className="footer-cta-section">
-        <div className="footer-cta-content">
-          <span className="footer-eyebrow">HAVE SOMETHING IN MIND?</span>
-
-          <h2>
-            Let's create something
-            <br />
-            <em>extraordinary.</em>
-          </h2>
-        </div>
-
-        <a href="/contact" className="footer-main-button">
-          <span>START YOUR PROJECT</span>
-          <span className="footer-main-button-arrow">↗</span>
-        </a>
-      </section>
 
       {/* MAIN FOOTER CONTENT */}
       <div className="footer-main">
