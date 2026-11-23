@@ -38,14 +38,13 @@ export default function Footer() {
         </div>
 
         {/* EXPLORE */}
+        {/* EXPLORE */}
         <div className="footer-navigation">
           <span className="footer-label">EXPLORE</span>
 
           <nav>
-            {quickLinks.map((link, index) => (
+            {quickLinks.map((link) => (
               <a href={link.href} key={link.label}>
-                <span className="footer-link-index">0{index + 1}</span>
-
                 <span className="footer-link-name">{link.label}</span>
 
                 <span className="footer-link-arrow">↗</span>

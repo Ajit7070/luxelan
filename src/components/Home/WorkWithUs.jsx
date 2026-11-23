@@ -53,7 +53,7 @@ export default function WorkWithUs() {
           </p>
 
           <div className="work-note">
-            <span>01 / 01</span>
+            {/* <span>01 / 01</span> */}
             <span>YOUR NEXT CHAPTER STARTS HERE</span>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function WorkWithUs() {
 
           <form className="work-form" action="/api/work-with-us" method="POST">
             <div className="work-field">
-              <label htmlFor="work-name">01 — YOUR NAME</label>
+              <label htmlFor="work-name">— YOUR NAME</label>
               <input
                 id="work-name"
                 name="name"
@@ -77,7 +77,7 @@ export default function WorkWithUs() {
             </div>
 
             <div className="work-field">
-              <label htmlFor="work-email">02 — EMAIL ADDRESS</label>
+              <label htmlFor="work-email">— EMAIL ADDRESS</label>
               <input
                 id="work-email"
                 name="email"
@@ -88,7 +88,7 @@ export default function WorkWithUs() {
             </div>
 
             <div className="work-field">
-              <label htmlFor="work-phone">03 — PHONE NUMBER</label>
+              <label htmlFor="work-phone">— PHONE NUMBER</label>
               <input
                 id="work-phone"
                 name="phone"
@@ -98,7 +98,7 @@ export default function WorkWithUs() {
             </div>
 
             <div className="work-interest">
-              <label>04 — I'M INTERESTED IN</label>
+              <label>— I'M INTERESTED IN</label>
 
               <div className="work-options">
                 {interests.map((item) => (
@@ -117,7 +117,7 @@ export default function WorkWithUs() {
             </div>
 
             <div className="work-field">
-              <label htmlFor="work-message">05 — TELL US ABOUT YOUR IDEA</label>
+              <label htmlFor="work-message">— TELL US ABOUT YOUR IDEA</label>
               <textarea
                 id="work-message"
                 name="message"

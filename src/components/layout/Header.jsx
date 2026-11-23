@@ -149,7 +149,6 @@ export default function Header() {
     () => {
       setPageReady(true);
 
-      // Fallback if video takes too long
       const fallback = setTimeout(() => {
         setVideoReady(true);
       }, 1500);
@@ -244,18 +243,6 @@ export default function Header() {
         aria-hidden={!menuOpen}
         onClick={() => setMenuOpen(false)}
       >
-        {/* LEFT IMAGE / VIDEO AREA */}
-
-        {/* <div className="menu-visual">
-          <video autoPlay muted loop playsInline>
-            <source src="/assets/videos/banner-vdo.mp4" type="video/mp4" />
-          </video>
-
-          <div className="menu-visual-overlay"></div>
-
-          <div className="menu-brand">LUXELAN</div>
-        </div> */}
-
         {/* RIGHT NAVIGATION PANEL */}
 
         <div
@@ -279,15 +266,13 @@ export default function Header() {
           </div>
 
           <nav className="menu-navigation">
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <Link
                 href={item.href}
                 className="menu-link"
                 key={item.title}
                 onClick={() => setMenuOpen(false)}
               >
-                <span className="menu-index">0{index + 1}</span>
-
                 <span className="menu-title">{item.title}</span>
 
                 <span className="menu-arrow">↗</span>
@@ -295,10 +280,10 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="menu-bottom">
+          {/* <div className="menu-bottom">
             <span>CRAFTED FOR THE WAY YOU LIVE.</span>
             <span>© LUXELAN</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

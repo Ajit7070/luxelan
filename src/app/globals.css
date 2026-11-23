@@ -542,18 +542,19 @@ p {
 
 .menu-link {
   display: grid;
-  grid-template-columns: 35px 1fr 25px;
+  grid-template-columns: 1fr 25px;
   align-items: center;
   gap: 15px;
 
   padding: 10px 0;
+
   color: var(--lux-black);
   border-bottom: 1px solid rgba(51, 51, 51, 0.12);
 
   opacity: 0;
   visibility: hidden;
 
-  transition: color 0.3s ease;
+  transition: color 0.35s ease;
 }
 
 .menu-index {
@@ -565,8 +566,13 @@ p {
 .menu-title {
   font-family: var(--font-heading);
   font-size: clamp(23px, 3vw, 43px);
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.2;
-  transition: transform 0.35s ease;
+
+  transition: transform 0.35s ease, font-style 0.35s ease, color 0.35s ease;
+  text-transform: none;
+  transform: translateX(0);
 }
 
 .menu-arrow {
@@ -574,14 +580,19 @@ p {
   color: var(--lux-gold);
   opacity: 0;
   transform: translateX(-8px);
-  transition: all 0.35s ease;
+
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
+
+/* HOVER EFFECT */
 
 .menu-link:hover {
   color: var(--lux-gold);
 }
 
 .menu-link:hover .menu-title {
+  font-style: italic;
+  text-transform: lowercase;
   transform: translateX(10px);
 }
 
@@ -589,7 +600,6 @@ p {
   opacity: 1;
   transform: translateX(0);
 }
-
 /* MENU BOTTOM */
 
 .menu-bottom {
@@ -606,7 +616,19 @@ p {
   letter-spacing: 2px;
   color: var(--lux-dark-skin);
 }
+/* Prevent separate scrollbar inside menu */
+.menu-overlay,
+.menu-panel {
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 
+/* Keep menu content within viewport */
+.menu-panel {
+  box-sizing: border-box;
+}
 /* =========================================
    RESPONSIVE - TABLET
 ========================================= */
@@ -690,8 +712,7 @@ p {
   }
 
   .menu-link {
-    padding: 12px 0;
-    grid-template-columns: 25px 1fr 20px;
+    grid-template-columns: 1fr 20px;
     gap: 10px;
   }
 
@@ -1066,12 +1087,14 @@ p {
 
   padding: clamp(30px, 6vw, 90px);
 
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle at 80% 20%,
       rgba(209, 134, 76, 0.14),
       transparent 45%
     ),
-    #17201f;
+    #17201f; */
+  /* background: var(--lux-gold); */
+  background: #e8ded2;
 
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1080,7 +1103,8 @@ p {
   font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 3px;
-  color: var(--lux-light-gold);
+  /* color: var(--lux-light-gold); */
+  color: var(--lux-gold);
   margin-bottom: 25px;
 }
 
@@ -1089,7 +1113,7 @@ p {
   font-weight: 400;
   font-size: clamp(55px, 8vw, 105px);
   line-height: 0.95;
-  color: #fff;
+  color: var(--lux-gold);
   margin-bottom: 35px;
 }
 
@@ -1102,7 +1126,8 @@ p {
 
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
-
+  /* color: #000; */
+  background: var(--lux-dark-skin);
   font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 3px;
@@ -1944,7 +1969,7 @@ p {
 .footer-navigation nav a {
   position: relative;
   display: grid;
-  grid-template-columns: 25px 1fr 18px;
+  grid-template-columns: 1fr 18px;
   align-items: center;
   gap: 8px;
   padding: 10px 0;
@@ -1953,11 +1978,6 @@ p {
   font-size: 13px;
   text-decoration: none;
   transition: color 0.3s ease, padding 0.3s ease;
-}
-
-.footer-link-index {
-  font-size: 9px;
-  color: var(--footer-gold);
 }
 
 .footer-link-arrow {
@@ -2403,6 +2423,11 @@ p {
 
 .work-field:focus-within {
   border-color: var(--lux-gold);
+}
+/* Work form placeholder text */
+.work-field input::placeholder,
+.work-field textarea::placeholder {
+  font-size: 13px;
 }
 
 /* INTEREST OPTIONS */
