@@ -1,5 +1,3 @@
-import { Span } from "next/dist/trace";
-
 const blogPosts = [
   {
     id: 1,
