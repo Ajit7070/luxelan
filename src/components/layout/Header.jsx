@@ -24,7 +24,7 @@ export default function Header() {
   const menuItems = [
     { title: "ABOUT", href: "/about" },
     { title: "OUR PROJECTS", href: "/projects" },
-    { title: "THE LUXELAN LIFE", href: "/luxelan-life" },
+
     { title: "HOW IT WORKS", href: "/process" },
     { title: "CONTENT HUB", href: "/blogs" },
     { title: "CAREERS", href: "/careers" },

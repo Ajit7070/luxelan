@@ -549,7 +549,6 @@ p {
   padding: 10px 0;
 
   color: var(--lux-black);
-  border-bottom: 1px solid rgba(51, 51, 51, 0.12);
 
   opacity: 0;
   visibility: hidden;
@@ -1482,7 +1481,7 @@ p {
 
 .stylux-content h2 {
   /* font-family: var(--font-body); */
-  font-family: "Quiche Sans", serif;
+
   font-size: clamp(27px, 3.1vw, 44px);
   font-weight: 400;
   line-height: 1.35;
@@ -2932,8 +2931,8 @@ p {
   display: block;
   width: auto;
   height: auto;
-  max-width: 175px;
-  max-height: 75px;
+  max-width: 205px;
+  max-height: 95px;
   object-fit: contain;
 
   filter: grayscale(1) brightness(0) invert(1);

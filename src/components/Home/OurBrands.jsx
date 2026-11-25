@@ -1,17 +1,26 @@
 "use client";
 
 const brands = [
-  { name: "ARRIVAE", src: "/assets/images/brands/arr_logo.png" },
-  { name: "Kajaria", src: "/assets/images/brands/logo01.png" },
-  { name: "Häfele", src: "/assets/images/brands/logo04.png" },
-  { name: "LG", src: "/assets/images/brands/logo06.jpg" },
-  { name: "Samsung", src: "/assets/images/brands/logo08.png" },
-  { name: "Nutrise", src: "/assets/images/brands/logo14.png" },
-  { name: "Hitachi", src: "/assets/images/brands/logo17.png" },
-  { name: "Legrand", src: "/assets/images/brands/logo18.png" },
-  { name: "Asian Paints", src: "/assets/images/brands/loho10.png" },
+  { name: "Abner", src: "/assets/images/brands/abner.png" },
+  { name: "Arte", src: "/assets/images/brands/Arte.png" },
+  { name: "Blum", src: "/assets/images/brands/BLUM.png" },
+  { name: "CMC", src: "/assets/images/brands/CMC.png" },
+  { name: "Decor", src: "/assets/images/brands/Decor.png" },
+  { name: "Dulux", src: "/assets/images/brands/Dulux.png" },
+  { name: "Greenlam", src: "/assets/images/brands/Greenlam.png" },
+  { name: "Häfele", src: "/assets/images/brands/Hafele.png" },
+  { name: "Hansgrohe", src: "/assets/images/brands/Hansgrohe.png" },
+  { name: "Hybec", src: "/assets/images/brands/Hybec.png" },
+  { name: "Jaipur Rugs", src: "/assets/images/brands/Jaipur%20rugs.png" },
+  { name: "Kohler", src: "/assets/images/brands/Kohler.png" },
+  { name: "Lafit", src: "/assets/images/brands/Lafit.png" },
+  { name: "Legrand", src: "/assets/images/brands/legrand.png" },
+  { name: "Moto", src: "/assets/images/brands/Moto.png" },
+  { name: "Samsung", src: "/assets/images/brands/Samsung.png" },
+  { name: "Simpol", src: "/assets/images/brands/Simpol.png" },
+  { name: "Stibel", src: "/assets/images/brands/Stibel.png" },
+  { name: "Yale", src: "/assets/images/brands/yale.png" },
 ];
-
 export default function OurBrands() {
   return (
     <section className="brands-section" id="our-brands">
